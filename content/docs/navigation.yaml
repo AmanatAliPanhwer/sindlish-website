@@ -1,0 +1,46 @@
+- title: Documentation
+  slug: introduction
+  icon: docs
+  items:
+    - section: Getting Started
+      icon: book
+      items:
+        - title: Welcome to Sindlish
+          slug: introduction
+        - title: Setup & VS Code
+          slug: vscode-extension
+    - section: Language Guide
+      icon: code
+      items:
+        - title: Comments
+          slug: basics/comments
+        - title: Variables & Types
+          slug: basics/variables
+        - title: Math & Logic
+          slug: basics/math
+        - title: Conditions (If/Else)
+          slug: basics/conditions
+        - title: Loops (Iterators)
+          slug: basics/loops
+        - title: Functions
+          slug: intermediate/functions
+        - title: Handling Errors
+          slug: intermediate/errors
+    - section: Data Structures
+      icon: cpu
+      items:
+        - title: Lists (fehrist)
+          slug: data-structures/lists
+        - title: Dictionaries (lughat)
+          slug: data-structures/dictionaries
+        - title: Sets (majmuo)
+          slug: data-structures/sets
+    - section: Reference
+      icon: library
+      items:
+        - title: All Keywords
+          slug: reference/keywords
+        - title: Standard Library
+          slug: reference/standard-library
+        - title: Examples
+          slug: reference/examples

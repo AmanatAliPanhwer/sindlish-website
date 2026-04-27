@@ -1,0 +1,13 @@
+.cache/
+.next/
+.cursor/
+.claude/
+.vscode/
+.vercel/
+package.json
+package-lock.json
+public/
+
+# content files
+content/docs/postgresql/query-reference.md
+content/docs/functions/json_extract_path.md
