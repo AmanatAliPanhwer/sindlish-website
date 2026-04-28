@@ -151,8 +151,8 @@ const DropdownMenu = ({ gitHubPath, className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
 
-  const siteUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || '';
-  const markdownPath = `/${gitHubPath.replace('content/', '')}`;
+  const siteUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : '');
+  const markdownPath = `/md/${gitHubPath.replace('content/', '')}`;
   const markdownUrl = `${siteUrl}${markdownPath}`;
 
   const close = useCallback(() => setIsOpen(false), []);

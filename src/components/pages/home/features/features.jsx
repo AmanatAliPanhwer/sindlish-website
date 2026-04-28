@@ -46,15 +46,15 @@ const Features = () => (
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
        <Container
-        className="relative grid grid-cols-[224px_1fr] items-start gap-x-32 xl:grid-cols-1 xl:gap-y-12"
+        className="relative grid grid-cols-[224px_1fr] items-start gap-x-32 xl:grid-cols-1 xl:gap-y-12 md:gap-y-8"
         size="1600"
       >
         <div className="xl:hidden" /> {/* Spacer for TOC */}
-        <div className="flex flex-col gap-y-16">
+        <div className="flex flex-col gap-y-16 lg:gap-y-12 md:gap-y-8">
           <div>
-            <SectionLabel theme="white" className="mb-6 italic opacity-80">Global Impact</SectionLabel>
-            <h2 className="flex flex-col items-start gap-y-4">
-              <span className="text-xl font-medium uppercase tracking-[0.2em] text-[#E02424]">
+            <SectionLabel theme="white" className="mb-6 italic opacity-80 md:mb-4">Global Impact</SectionLabel>
+            <h2 className="flex flex-col items-start gap-y-4 md:gap-y-2">
+              <span className="text-xl font-medium uppercase tracking-[0.2em] text-[#E02424] md:text-lg">
                 Built for everyone
               </span>
               <span className="text-5xl font-bold tracking-tight text-white xl:text-4xl lg:text-3xl md:text-2xl max-w-4xl leading-[1.1]">
@@ -63,7 +63,7 @@ const Features = () => (
               </span>
             </h2>
           </div>
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-1">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-1 md:gap-4">
             {ITEMS.map(({ icon, title, description, gradient }, index) => (
               <m.div
                 key={index}
@@ -73,7 +73,8 @@ const Features = () => (
                 transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
                 className={cn(
                   'group relative flex flex-col p-10 bg-[#0A0A0B] border border-gray-new-20 rounded-none transition-all duration-300',
-                  'hover:border-[#E02424]/30 hover:shadow-[0_0_40px_-15px_rgba(224,36,36,0.2)]'
+                  'hover:border-[#E02424]/30 hover:shadow-[0_0_40px_-15px_rgba(224,36,36,0.2)]',
+                  'md:p-8 sm:p-6'
                 )}
               >
                 <div className={cn(

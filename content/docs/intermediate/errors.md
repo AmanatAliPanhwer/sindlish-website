@@ -4,71 +4,101 @@ summary: Build crash-proof software using the Result system and the ghalti keywo
 enableTableOfContents: true
 ---
 
-Most programming languages use "Exceptions" (try/catch), which can make code hard to follow. Sindlish uses a more modern **Result Model**. Instead of crashing, a function that might fail returns a "Result" that you must explicitly handle.
+Most programming languages use "Exceptions" (try/catch), which can make code unpredictable and hard to follow. Sindlish uses a modern **Result Model**. Instead of crashing, functions that might fail return a **Result** object that must be handled.
 
-## 1. The `ghalti` (Error) Keyword
+## 1. The Result Object
 
-If something goes wrong in your function, you return a **`ghalti`**.
+Every function call in Sindlish returns a Result. A result can be in one of two states:
+- **Ok**: The operation was successful and contains the value.
+- **Ghalti**: The operation failed and contains an error message or object.
+
+You can check the state of a result using the `.ok` and `.ghalti` properties:
 
 ```sd
-kaam divide(a: adad, b: adad) -> Result {
-    agar b == 0 {
-        wapas ghalti("Division by zero is not allowed!")
+res = some_function()
+agar res.ghalti {
+    likh("Something went wrong!")
+}
+```
+
+---
+
+## 2. Returning Errors (`ghalti`)
+
+To signal an error from a function, use the `ghalti()` constructor.
+
+```sd
+kaam check_password(pass) {
+    agar lambi(pass) < 8 {
+        wapas ghalti("Password is too short!")
     }
-    wapas a / b
+    wapas sach
 }
 ```
 
 ---
 
-## 2. Handling Results
+## 3. Handling Results (The 5 Methods)
 
-When you call a function that returns a `Result`, you have four ways to handle it.
+Sindlish provides powerful operators and methods to deal with results without writing many `if` statements.
 
-### A. The `?` Operator (Safe Propagate)
-If the result is an error, the `?` operator immediately returns that error from the current function.
+### A. The `?` Operator (Soft Propagate)
+The "Question Mark" operator is the most common way to handle errors. 
+- If the result is **Ok**, it "unwraps" the value.
+- If the result is **Ghalti**, it immediately returns the error from the current function.
 
 ```sd
-kaam calculate() -> Result {
-    val = divide(10, 0)? # If this fails, calculate() returns the error immediately.
-    wapas val + 5
+kaam setup() -> Result {
+    user = get_user()?  # If this fails, setup() returns the error here.
+    likh("Welcome " + user)
+    wapas sach
 }
 ```
 
-### B. The `.bachao()` Method (Default Value)
-If you don't want to crash or return an error, you can provide a fallback value.
+### B. The `.bachao()` Method (Default/Fallback)
+Use this when you want to provide a safe default value if an error occurs.
 
 ```sd
-val = divide(10, 0).bachao(0) # If it fails, val becomes 0 instead of an error.
+# If the file doesn't exist, 'content' becomes an empty string instead of an error.
+content = read_file("config.txt").bachao("") 
 ```
 
-### C. The `.lazmi()` Method (Panic if Error)
-Use this if you are 100% sure the code won't fail. If it *does* fail, the program will crash with a clear message.
+### C. The `.lazmi()` Method (Required)
+Use this when an error is unacceptable. If the result is a `Ghalti`, the program will crash (Panic) with the custom message you provide.
 
 ```sd
-val = divide(10, 2).lazmi()
+# If this fails, the program stops immediately with the message "Database required!"
+db = connect_db().lazmi("Database required!")
 ```
 
-### D. The `!!` Operator (Total Panic)
-The "Nuclear Option." This forces the value out of the result. If it is an error, the program crashes instantly.
+### D. The `!!` Operator (Panic Unwrap)
+Similar to `.lazmi()`, but it crashes with the **original** error message contained in the result.
 
 ```sd
-val = divide(10, 0)!! # CRASH!
+val = divide(10, 0)!! # CRASHES with "Zero saan vand natho kare saghjay"
 ```
 
 ---
 
-## 3. Why use Results?
+## 4. Triggering a Panic (`ghalti` statement)
 
-By using the Result model, Sindlish forces you to think about errors *while* you are writing the code, not after it crashes in production. This leads to much more reliable, "crash-proof" software.
+When `ghalti` is used as a **standalone statement** (not inside a `wapas`), it acts as an immediate panic. Use this for unrecoverable system failures.
 
 ```sd
-# Example of robust error handling
-kaam fetch_user_data(id: adad) -> Result {
-    # logic to get data...
-    wapas ghalti("User not found")
+agar critical_system_failure {
+    ghalti("CRITICAL ERROR: Reactor overheating!") # Program stops here.
 }
-
-user = fetch_user_data(1).bachao("Guest User")
-likh("Welcome, " + user)
 ```
+
+---
+
+## 5. Summary Table
+
+| Tool | Behavior on Ok | Behavior on Ghalti |
+| :--- | :--- | :--- |
+| **`?`** | Returns Value | **Returns Error** from function |
+| **`.bachao(v)`** | Returns Value | Returns **`v`** |
+| **`.lazmi(m)`** | Returns Value | **Panics** with message `m` |
+| **`!!`** | Returns Value | **Panics** with original error |
+| **`res.ok`** | `sach` | `koorh` |
+| **`res.ghalti`** | `koorh` | `sach` |

@@ -134,7 +134,7 @@ likh(lafz(sach))  # Prints the text "sach"
 ```
 
 ### Converting to Booleans (`faislo`)
-When converting to a boolean, Sindlish follows the concept of "Truthiness". 
+When converting a boolean, Sindlish follows the concept of "Truthiness". 
 - `0`, `0.0`, `""` (empty string), and `khali` will convert to `koorh` (False).
 - Any non-zero number and any non-empty string will convert to `sach` (True).
 

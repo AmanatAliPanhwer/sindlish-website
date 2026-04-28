@@ -7,7 +7,9 @@
       items:
         - title: Welcome to Sindlish
           slug: introduction
-        - title: Setup & VS Code
+        - title: Installation
+          slug: get-started/installation
+        - title: VS Code Extension
           slug: vscode-extension
     - section: Language Guide
       icon: code

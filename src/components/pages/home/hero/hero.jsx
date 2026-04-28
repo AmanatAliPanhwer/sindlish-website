@@ -83,39 +83,39 @@ agar version == 1 {
             bringing software development to millions of Sindhi speakers worldwide.
           </m.p>
           <m.div
-            className="mt-10 flex gap-x-5 lg:mt-8 lg:gap-x-4"
+            className="mt-10 flex gap-x-5 lg:mt-8 lg:gap-x-4 sm:flex-col sm:gap-y-4 sm:gap-x-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6, ease: 'easeOut' }}
           >
-            <Button theme="white-filled" size="new" to={LINKS.download}>
+            <Button theme="white-filled" size="new" to={LINKS.download} className="sm:w-full">
               Download
             </Button>
-            <Button theme="outlined" size="new" to={LINKS.docsHome}>
+            <Button theme="outlined" size="new" to={LINKS.docsHome} className="sm:w-full">
               Read the docs
             </Button>
           </m.div>
           {/* Code example preview */}
-          <div className="flex flex-col max-w-2xl mt-20 lg:mt-16 sm:mt-12">
+          <div className="flex flex-col w-full max-w-2xl mt-20 lg:mt-16 sm:mt-12">
             <m.div
               className="overflow-hidden rounded-none border border-gray-new-20 bg-[#0A0A0B] group/hero-code"
               initial={{ opacity: 0, scale: 0.95, y: 40 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="flex items-center justify-between border-b border-gray-new-20 px-4 py-3">
+              <div className="flex items-center justify-between border-b border-gray-new-20 px-4 py-3 sm:px-3 sm:py-2.5">
                 <div className="flex items-center gap-2">
                   <div className="flex gap-1.5">
-                    <span className="size-3 rounded-none bg-[#E02424]/60" />
-                    <span className="size-3 rounded-none bg-[#984A45]/60" />
-                    <span className="size-3 rounded-none bg-[#1B3A5C]/60" />
+                    <span className="size-3 rounded-none bg-[#E02424]/60 sm:size-2" />
+                    <span className="size-3 rounded-none bg-[#984A45]/60 sm:size-2" />
+                    <span className="size-3 rounded-none bg-[#1B3A5C]/60 sm:size-2" />
                   </div>
-                  <span className="ml-2 text-xs font-mono text-gray-new-50 uppercase tracking-widest">hello.sd</span>
+                  <span className="ml-2 text-xs font-mono text-gray-new-50 uppercase tracking-widest sm:text-[10px] sm:ml-1">hello.sd</span>
                 </div>
                 <button
                   onClick={handleRun}
                   disabled={status === 'running'}
-                  className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-gray-new-50 opacity-0 group-hover/hero-code:opacity-100 transition-all hover:text-[#E02424] disabled:opacity-50"
+                  className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-gray-new-50 opacity-0 group-hover/hero-code:opacity-100 transition-all hover:text-[#E02424] disabled:opacity-50 lg:opacity-100"
                 >
                   {status === 'running' ? (
                     <span className="size-2 animate-spin rounded-full border border-current border-t-transparent" />
@@ -125,20 +125,22 @@ agar version == 1 {
                   {status === 'running' ? 'Running...' : 'Run Code'}
                 </button>
               </div>
-              <pre className="p-8 text-base leading-relaxed font-mono text-gray-new-80 sm:text-sm">
-                <code>
-                  <span className="text-[#E02424]">likh</span>(<span className="text-[#FFED9C]">&quot;Salam Dunya!&quot;</span>){'\n'}
-                  {'\n'}
-                  <span className="text-gray-new-50">{'# Variables'}</span>{'\n'}
-                  <span className="text-[#E02424]">lafz</span> name = <span className="text-[#FFED9C]">&quot;Sindlish&quot;</span>{'\n'}
-                  <span className="text-[#E02424]">adad</span> version = <span className="text-[#1B3A5C]">1</span>{'\n'}
-                  {'\n'}
-                  <span className="text-gray-new-50">{'# Conditional'}</span>{'\n'}
-                  <span className="text-[#E02424]">agar</span> version == <span className="text-[#1B3A5C]">1</span> &#123;{'\n'}
-                  {'  '}<span className="text-[#E02424]">likh</span>(<span className="text-[#FFED9C]">&quot;Sindlish is awesome!&quot;</span>){'\n'}
-                  &#125;{'\n'}
-                </code>
-              </pre>
+              <div className="overflow-x-auto custom-scrollbar">
+                <pre className="p-8 text-base leading-relaxed font-mono text-gray-new-80 sm:p-5 sm:text-[13px] min-w-fit">
+                  <code>
+                    <span className="text-[#E02424]">likh</span>(<span className="text-[#FFED9C]">&quot;Salam Dunya!&quot;</span>){'\n'}
+                    {'\n'}
+                    <span className="text-gray-new-50">{'# Variables'}</span>{'\n'}
+                    <span className="text-[#E02424]">lafz</span> name = <span className="text-[#FFED9C]">&quot;Sindlish&quot;</span>{'\n'}
+                    <span className="text-[#E02424]">adad</span> version = <span className="text-[#1B3A5C]">1</span>{'\n'}
+                    {'\n'}
+                    <span className="text-gray-new-50">{'# Conditional'}</span>{'\n'}
+                    <span className="text-[#E02424]">agar</span> version == <span className="text-[#1B3A5C]">1</span> &#123;{'\n'}
+                    {'  '}<span className="text-[#E02424]">likh</span>(<span className="text-[#FFED9C]">&quot;Sindlish is awesome!&quot;</span>){'\n'}
+                    &#125;{'\n'}
+                  </code>
+                </pre>
+              </div>
             </m.div>
             <AnimatePresence>
               {result && (
@@ -148,13 +150,13 @@ agar version == 1 {
                   exit={{ opacity: 0, height: 0 }}
                   className="overflow-hidden"
                 >
-                  <div className="mt-4 rounded-none border border-[#E02424]/20 bg-[#E02424]/5 p-6 shadow-xl">
+                  <div className="mt-4 rounded-none border border-[#E02424]/20 bg-[#E02424]/5 p-6 shadow-xl sm:p-4">
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-[10px] font-bold uppercase tracking-widest text-[#E02424]">Console Output</span>
                       <button onClick={() => setResult(null)} className="text-[10px] text-gray-new-40 hover:text-white uppercase font-bold">Clear</button>
                     </div>
                     <pre
-                      className="font-mono text-sm text-green-400 whitespace-pre-wrap"
+                      className="font-mono text-sm text-green-400 whitespace-pre-wrap sm:text-xs"
                       dangerouslySetInnerHTML={{ __html: result }}
                     />
                   </div>
@@ -181,16 +183,19 @@ agar version == 1 {
             <source src="/videos/pages/home/hero/hero.mp4" type="video/mp4" />
           </PauseableVideo>
           <Image
-            className="relative left-[40%] hidden w-[752px] max-w-none -translate-x-1/2 sm:block opacity-30"
+            className="relative left-[40%] hidden w-[752px] max-w-none -translate-x-1/2 sm:block opacity-20 contrast-125 brightness-75"
             src={mobileBgIllustration}
             width={752}
             height={326}
             quality={100}
             alt=""
             priority
+            style={{ filter: 'sepia(100%) hue-rotate(-50deg) saturate(400%)' }}
           />
+          <div className="hidden sm:block absolute inset-0 bg-radial-gradient from-[#E02424]/20 via-transparent to-transparent opacity-40" />
         </div>
       </section>
+
     </LazyMotion>
   );
 };

@@ -6,7 +6,7 @@ enableTableOfContents: true
 
 The best way to learn any language is by reading and writing code. Here are some common algorithms implemented in Sindlish.
 
-## 1. Fibonacci Sequence
+## 1. Fibonacci Sequence (Recursion)
 
 ```sd
 kaam fib(n: adad) -> adad {
@@ -17,28 +17,28 @@ kaam fib(n: adad) -> adad {
 }
 
 # Print the first 10 numbers
-tor i = 0; i < 10; i = i + 1 {
+har i mein range(10) {
     likh(fib(i))
 }
 ```
 
 ---
 
-## 2. Filtering a List
+## 2. Filtering a List (Even Numbers)
 
 ```sd
 kaam get_evens(nums: fehrist) -> fehrist {
     evens = []
-    tor n in nums {
+    har n mein nums {
         agar n % 2 == 0 {
-            evens.vadh(n)
+            evens.wadha(n)
         }
     }
     wapas evens
 }
 
 numbers = [1, 2, 3, 4, 5, 6, 7, 8]
-likh(get_evens(numbers)) # [2, 4, 6, 8]
+likh(get_evens(numbers)) # Prints: [2, 4, 6, 8]
 ```
 
 ---
@@ -52,11 +52,11 @@ students = [
     { "name": "Sara", "score": 91 }
 ]
 
-tor s in students {
+har s mein students {
     result = ""
     agar s["score"] >= 50 {
         result = "Passed"
-    } nahito {
+    } warna {
         result = "Failed"
     }
     
@@ -66,18 +66,47 @@ tor s in students {
 
 ---
 
-## 4. Handling Input Errors
+## 4. Robust Input Processing (Result System)
 
 ```sd
-kaam parse_user_input(input: lafz) -> Result {
-    val = adad(input)
-    agar val < 0 {
-        wapas ghalti("Value cannot be negative")
+kaam parse_age(input_text: lafz) {
+    # Typecasting can fail if the string isn't a number
+    age = adad(input_text)
+    
+    agar age < 0 {
+        wapas ghalti("Umar negative nathi thi saghjay!")
     }
-    wapas val
+    
+    wapas age
 }
 
-# Safe usage
-val = parse_user_input("-5").bachao(0)
-likh(val) # 0
+# 1. Using bachao for a safe default
+val1 = parse_age("abc").bachao(0)
+likh("Value 1: ", val1) # Prints: 0
+
+# 2. Using ? to propagate
+kaam process() {
+    age = parse_age("25")?
+    likh("Valid age processed: ", age)
+}
+
+process()
+```
+
+---
+
+## 5. Dictionary Operations
+
+```sd
+inventory = { "Apple": 10, "Banana": 5 }
+
+# Safely get a value with a fallback
+count = inventory.hasil("Mango", 0)
+likh("Mangoes in stock: " + lafz(count))
+
+# Loop through keys
+har item mein inventory {
+    stock = inventory[item]
+    likh(item + " -> " + lafz(stock))
+}
 ```

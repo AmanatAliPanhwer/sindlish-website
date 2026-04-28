@@ -17,6 +17,7 @@ Arithmetic operators are used to perform common mathematical operations.
 | **`*`** | Multiplication | `10 * 5` | `50` |
 | **`/`** | Division | `10 / 2` | `5.0` |
 | **`%`** | Modulo (Remainder) | `10 % 3` | `1` |
+| **`^`** | Exponent | `2 ^ 3` | `8` |
 
 ### Floating Point Division
 In Sindlish, division (`/`) always returns a decimal number (**`dahai`**), even if both numbers are integers. This prevents precision loss.
@@ -47,30 +48,32 @@ Comparison operators are used to compare two values. They always return a **`fai
 
 Logical operators allow you to combine multiple comparisons into a single decision.
 
-| Operator | Keyword | Meaning |
-| :--- | :--- | :--- |
-| **`&&`** | `and` | True if **both** sides are true |
-| **`||`** | `or` | True if **at least one** side is true |
-| **`!`** | `not` | Inverts the boolean value |
+| Keyword | Meaning |
+| :--- | :--- |
+| **`aen`** | True if **both** sides are true |
+| **`ya`** | True if **at least one** side is true |
+| **`nah`** (or **`!`**) | Inverts the boolean value |
 
 ```sd
 umar = 20
 has_license = sach
 
-agar umar >= 18 && has_license == sach {
+agar umar >= 18 aen has_license == sach {
     likh("You can drive!")
 }
 ```
 
 ---
 
-## 4. Operator Precedence (BODMAS)
+## 4. Operator Precedence
 
 When you write complex expressions like `10 + 5 * 2`, Sindlish follows standard mathematical rules to decide which operation happens first.
 
 1. **Parentheses `()`**: Anything inside brackets happens first.
-2. **Multiplication/Division `* / %`**: These happen before addition.
-3. **Addition/Subtraction `+ -`**: These happen last.
+2. **Unary `- + !`**: Negation or logical not.
+3. **Power `^`**: Exponentiation.
+4. **Multiplication/Division `* / %`**: These happen before addition.
+5. **Addition/Subtraction `+ -`**: These happen last.
 
 ```sd
 result = (10 + 5) * 2  # Result is 30

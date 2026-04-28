@@ -4,67 +4,55 @@ summary: Explore the built-in functions that come with Sindlish.
 enableTableOfContents: true
 ---
 
-Sindlish comes with a powerful set of built-in functions to help you interact with the system and manipulate data.
+Sindlish comes with a essential set of built-in functions that are available in the global scope without any extra setup.
 
-## Output Functions
+## Console I/O
 
-### `likh(value)`
-The most commonly used function. It prints any value to the console.
+### `likh(...)`
+The primary output function. It accepts any number of arguments, converts them to strings, and prints them to the console separated by spaces.
 ```sd
-likh("Salam!")
+likh("Salam", "Sindh", 2024) # Prints: Salam Sindh 2024
+```
+
+### `puch(prompt)`
+The input function. It displays the `prompt` string to the user and waits for them to type something. It returns the user's input as a **lafz** (string).
+```sd
+naalo = puch("Tawaan jo naalo cha aahe? ")
+likh("Salam, " + naalo)
 ```
 
 ---
 
-## Math Functions
+## Collections & Ranges
 
-### `qadr(value)`
-Returns the absolute (positive) value of a number.
+### `lambi(collection)`
+Returns the number of items in a **fehrist**, **lughat**, or **majmuo**, or the number of characters in a **lafz**.
 ```sd
-likh(qadr(-10)) # Prints: 10
+likh(lambi("Sindh")) # Prints: 5
+likh(lambi([1, 2, 3])) # Prints: 3
 ```
 
-### `gol(value)`
-Rounds a decimal number to the nearest whole number.
+### `range(start, end, step)`
+Generates a list of integers.
+- `range(5)` -> `[0, 1, 2, 3, 4]`
+- `range(1, 6)` -> `[1, 2, 3, 4, 5]`
+- `range(0, 10, 2)` -> `[0, 2, 4, 6, 8]`
+
+### `majmuo(iterable)`
+Creates a new **majmuo** (Set). If an iterable (like a List or String) is provided, it converts it into a set, automatically removing any duplicates.
 ```sd
-likh(gol(3.7)) # Prints: 4
-```
-
----
-
-## String Functions
-
-### `ghat(value)`
-Returns the length (number of characters) of a string.
-```sd
-likh(ghat("Sindh")) # Prints: 5
-```
-
-### `uulat(text)`
-Returns a reversed version of the string.
-```sd
-likh(uulat("ABC")) # Prints: CBA
+unique = majmuo([1, 2, 2, 3]) # {1, 2, 3}
 ```
 
 ---
 
-## System Functions
+## Type Conversion (Cast Functions)
 
-### `waqt()`
-Returns the current system time in milliseconds. Useful for measuring performance.
+As detailed in the **[Variables & Types](/docs/basics/variables#typecasting-qisam-badli---in-detail)** section, the type keywords themselves act as functions to convert data:
 
-### `qisam(value)`
-Returns a string representing the data type of the value.
-```sd
-likh(qisam(10)) # Prints: adad
-```
-
----
-
-## Global Constants
-
-| Constant | Description |
-| :--- | :--- |
-| **`VERSION`** | Current Sindlish version string |
-| **`PLATFORM`** | The OS running the interpreter |
-| **`NULL`** | Equivalent to `khali` |
+- `adad(value)`: Convert to Integer.
+- `dahai(value)`: Convert to Float.
+- `lafz(value)`: Convert to String.
+- `faislo(value)`: Convert to Boolean.
+- `fehrist(value)`: Convert to List.
+- `majmuo(value)`: Convert to Set.

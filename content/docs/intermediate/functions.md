@@ -1,5 +1,5 @@
 ---
-title: Functions
+title: Functions (kaam)
 summary: Organize your code into reusable, modular blocks using kaam.
 enableTableOfContents: true
 ---
@@ -8,7 +8,7 @@ Functions (defined with the **`kaam`** keyword) are blocks of reusable code desi
 
 ## 1. Defining a Function
 
-A basic function is defined with a name and a block of code.
+A function is defined with a name, a set of parameters in parentheses `()`, and a body enclosed in curly braces `{}`.
 
 ```sd
 kaam salam() {
@@ -21,9 +21,9 @@ salam()
 
 ---
 
-## 2. Parameters (Input)
+## 2. Parameters & Types
 
-Functions can accept inputs, called parameters. You can even specify the type of the parameter for extra safety.
+Functions can accept inputs. You can optionally specify the type of each parameter for extra safety.
 
 ```sd
 kaam greet(naalo: lafz) {
@@ -31,69 +31,89 @@ kaam greet(naalo: lafz) {
 }
 
 greet("Amanat")
-greet("Sindh")
+```
+
+### Default Parameters
+You can provide default values for parameters. If the caller doesn't provide a value, the default will be used.
+
+```sd
+kaam khush_amdeed(naalo = "Mehman") {
+    likh("Khush Amdeed, " + naalo)
+}
+
+khush_amdeed()          # Prints: Khush Amdeed, Mehman
+khush_amdeed("Ali")     # Prints: Khush Amdeed, Ali
 ```
 
 ---
 
-## 3. Return Values (Output)
+## 3. Return Values (wapas)
 
-Functions can calculate a result and "give it back" to you using the **`wapas`** (return) keyword. You must specify the return type using the `->` arrow.
+Functions in Sindlish can return values in two ways:
+
+### A. Explicit Return (`wapas`)
+The `wapas` keyword immediately stops the function and sends a value back to the caller. You can optionally specify the return type using the `->` arrow.
 
 ```sd
 kaam add(a: adad, b: adad) -> adad {
     wapas a + b
 }
-
-result = add(10, 20)
-likh(result) # Prints: 30
 ```
 
-### Early Returns
-The `wapas` keyword immediately stops the function and exits. This is useful for error checking.
+### B. Implicit Return
+If the last line of a function is an expression (and you haven't used `wapas`), Sindlish will automatically return the result of that expression.
 
 ```sd
-kaam check_age(age: adad) -> lafz {
-    agar age < 0 {
-        wapas "Invalid age"
-    }
-    
-    agar age >= 18 {
-        wapas "Adult"
-    }
-    
-    wapas "Minor"
+kaam square(n) {
+    n * n  # This is automatically returned!
 }
+
+result = square(5) # result is 25
 ```
 
 ---
 
-## 4. Scope (Parda)
+## 4. The Result System
 
-Variables created inside a function are "private" to that function. They cannot be accessed from outside. This is called **Block Scope**.
+By default, every value returned from a function in Sindlish is wrapped in a **Result** object (`Ok`). This is what allows Sindlish to handle errors so gracefully.
+
+If you want to return an error, use the `ghalti()` constructor:
 
 ```sd
-kaam test() {
-    secret = 123
+kaam vind(a, b) {
+    agar b == 0 {
+        wapas ghalti("Zero saan vand natho kare saghjay")
+    }
+    wapas a / b
+}
+```
+
+Learn more about handling these results in the **[Handling Errors](/docs/intermediate/errors)** section.
+
+---
+
+## 5. Function Scope
+
+Variables created inside a function are local to that function. They cannot be seen or modified from the outside.
+
+```sd
+kaam calculate() {
+    x = 10
 }
 
-test()
-# likh(secret) <-- This would throw an error! 'secret' only exists inside test().
+calculate()
+# likh(x) <-- Error! x is not defined here.
 ```
 
 ---
 
-## 5. First-Class Functions
+## 6. First-Class Functions
 
-In Sindlish, functions are "First-Class Citizens." This means you can store a function inside a variable or pass it as an argument to another function!
+In Sindlish, functions are "First-Class Citizens." This means you can store a function in a variable, pass it to another function, or return it from one!
 
 ```sd
-kaam say_hi() {
-    likh("Hi!")
-}
+kaam hello() { likh("Salam!") }
 
-my_func = say_hi
-my_func() # This works!
+f = hello
+f() # Calls hello()
 ```
-
-Functions are the building blocks of any professional application. By breaking your code into small, specialized functions, you make it easier to test, debug, and share with others.

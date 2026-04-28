@@ -138,32 +138,59 @@ const CodeBlockWrapper = ({
       </div>
       {/* Inline Console Output */}
       {(result !== null || loadProgress) && (
-        <div className="border-t border-gray-new-80 bg-gray-new-98 p-4 font-mono text-[13px] dark:border-gray-new-20 dark:bg-gray-new-8">
-          <div className="mb-2 flex items-center justify-between opacity-50">
-            <span className="text-[10px] font-bold uppercase tracking-widest">
-              {loadProgress ? 'Execution Status' : 'Console Output'}
-            </span>
+        <div className="relative border-t border-gray-new-80 bg-gray-new-98 px-6 py-6 font-mono text-[13px] dark:border-gray-new-20 dark:bg-[#060607] sm:px-4 sm:py-5">
+          <div className="mb-5 flex items-center justify-between sm:mb-4">
+            <div className="flex items-center gap-4 sm:gap-3">
+              <div className="flex gap-1.5 sm:hidden">
+                <div className="size-2.5 rounded-full border border-red-500/20 bg-red-500/10" />
+                <div className="size-2.5 rounded-full border border-yellow-500/20 bg-yellow-500/10" />
+                <div className="size-2.5 rounded-full border border-green-500/20 bg-green-500/10" />
+              </div>
+              <div className="h-4 w-px bg-gray-new-80 dark:bg-gray-new-20 sm:hidden" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-new-40 dark:text-gray-new-50 sm:tracking-widest">
+                {loadProgress ? 'Terminal: Loading' : 'Terminal: Output'}
+              </span>
+            </div>
             {result && (
               <button
                 onClick={() => setResult(null)}
-                className="hover:text-[#E02424] transition-colors"
+                className="group flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-new-40 transition-all hover:text-[#E02424] dark:text-gray-new-60"
               >
-                Clear
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity sm:hidden">Reset</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="opacity-60 group-hover:opacity-100"><path d="M18 6L6 18M6 6l12 12"/></svg>
               </button>
             )}
           </div>
-          {loadProgress && !result && (
-            <div className="flex items-center gap-2 text-gray-new-50 italic animate-pulse">
-              <span className="size-1.5 bg-[#E02424]" />
-              {loadProgress}
-            </div>
-          )}
-          {result && (
-            <pre
-              className="whitespace-pre-wrap text-green-600 dark:text-green-400"
-              dangerouslySetInnerHTML={{ __html: result }}
-            />
-          )}
+          
+          <div className="space-y-4 sm:space-y-3">
+            {loadProgress && !result && (
+              <div className="flex items-center gap-3 text-gray-new-40 italic sm:gap-2">
+                <div className="flex items-center gap-1">
+                  <span className="size-1 rounded-full bg-[#E02424] animate-[pulse_1s_infinite]" />
+                  <span className="size-1 rounded-full bg-[#E02424] animate-[pulse_1s_infinite_200ms]" />
+                  <span className="size-1 rounded-full bg-[#E02424] animate-[pulse_1s_infinite_400ms]" />
+                </div>
+                <span className="text-xs font-medium tracking-tight uppercase sm:text-[11px]">{loadProgress}</span>
+              </div>
+            )}
+            
+            {result && (
+              <div className="relative animate-in fade-in slide-in-from-top-2 duration-300">
+                <div className="flex items-start gap-4 sm:gap-3">
+                  <span className="mt-1 select-none text-[#E02424] font-bold tracking-tighter shrink-0 opacity-40 sm:mt-0.5">SD&gt;</span>
+                  <pre
+                    className={cn(
+                      "whitespace-pre-wrap leading-[1.6] tracking-tight text-sm sm:text-[13px]",
+                      result.toLowerCase().includes('error') || result.toLowerCase().includes('ghalti') 
+                        ? "text-red-500/90" 
+                        : "text-gray-new-20 dark:text-[#EAEAEA]"
+                    )}
+                    dangerouslySetInnerHTML={{ __html: result }}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </Tag>

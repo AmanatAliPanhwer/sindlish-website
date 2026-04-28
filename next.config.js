@@ -134,7 +134,6 @@ const defaultConfig = {
   },
   async redirects() {
     const docPosts = await getAllPosts();
-    const changelogPosts = await getAllChangelogs();
     const docsRedirects = docPosts.filter(Boolean).reduce((acc, post) => {
       const { slug, redirectFrom: postRedirects } = post;
       if (!postRedirects || !postRedirects.length) {
@@ -144,20 +143,6 @@ const defaultConfig = {
       const postRedirectsArray = postRedirects.map((redirect) => ({
         source: redirect,
         destination: generateDocPagePath(slug),
-        permanent: true,
-      }));
-
-      return [...acc, ...postRedirectsArray];
-    }, []);
-    const changelogRedirects = changelogPosts.filter(Boolean).reduce((acc, post) => {
-      const { slug, redirectFrom: postRedirects } = post;
-      if (!postRedirects || !postRedirects.length) {
-        return acc;
-      }
-
-      const postRedirectsArray = postRedirects.map((redirect) => ({
-        source: redirect,
-        destination: generateChangelogPath(slug),
         permanent: true,
       }));
 
@@ -2441,7 +2426,6 @@ const defaultConfig = {
         permanent: true,
       },
       ...docsRedirects,
-      ...changelogRedirects,
     ];
   },
   async rewrites() {

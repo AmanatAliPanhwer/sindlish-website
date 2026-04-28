@@ -1,96 +1,96 @@
 ---
 title: Loops (Iterators)
-summary: Repeat actions efficiently using for and while loops.
+summary: Repeat actions efficiently using har and jistain loops.
 enableTableOfContents: true
 ---
 
-Loops are used to repeat a block of code multiple times. Instead of writing the same line 100 times, you can write a loop that does the work for you in seconds.
+Loops are used to repeat a block of code multiple times. Sindlish provides two main types of loops: `har` for iteration and `jistain` for condition-based looping.
 
-## 1. The `tor` (For) Loop
+## 1. The `har` (For) Loop
 
-The `tor` loop is used to iterate over a range of numbers or a collection (like a list or dictionary).
+The `har` loop is used to iterate over a collection (like a list, dictionary, or set) or a range of numbers. The **`mein`** keyword is mandatory between the iterator variable and the collection.
 
 ### Numeric Range
-To run a loop from 1 to 10:
+The `range()` function generates a sequence of numbers. It can be used in three ways:
+1. `range(end)`: 0 to end (exclusive).
+2. `range(start, end)`: start to end (exclusive).
+3. `range(start, end, step)`: start to end with a custom increment.
 
 ```sd
-tor i = 1; i <= 10; i = i + 1 {
+# Loops from 0 to 4
+har i mein range(5) {
     likh("Count: " + lafz(i))
+}
+
+# Loops from 10 down to 2, skipping 2 each time
+har i mein range(10, 0, -2) {
+    likh("Down: " + lafz(i))
 }
 ```
 
-### Iterating over a List
-You can also use `tor` to look at every item in a list one by one.
+### Iterating over Collections
+You can use `har` to process items in any collection.
 
 ```sd
 fal = ["Ambu", "Kela", "Soof"]
 
-tor f in fal {
-    likh("I like " + f)
+har f mein fal {
+    likh("Khadaaseen: " + f)
 }
 ```
 
 ---
 
-## 2. The `jari` (While) Loop
+## 2. The `jistain` (While) Loop
 
-The `jari` (While) loop continues to run as long as a specific condition remains true. It is useful when you don't know exactly how many times you need to loop.
+The `jistain` loop continues to run as long as a specific condition remains **sach** (true).
 
 ```sd
 adad count = 1
 
-jari count <= 5 {
+jistain count <= 3 {
     likh("Iteration: " + lafz(count))
     count = count + 1
 }
 ```
 
-**⚠️ Warning: Infinite Loops**
-If you forget to update the condition (like `count = count + 1` above), the loop will run forever and crash your computer! Always ensure your loop has an exit strategy.
-
 ---
 
-## 3. Loop Control: `bas` & `halo`
+## 3. Loop Control: `tor` & `jari`
 
-Sometimes you need to exit a loop early or skip a specific iteration.
-
-### `bas` (Break)
-The `bas` keyword stops the loop immediately, even if the condition is still true.
+### `tor` (Break)
+The `tor` keyword exits the loop immediately.
 
 ```sd
-tor i = 1; i <= 10; i = i + 1 {
-    agar i == 6 {
-        bas # Stop the loop when i reaches 6
+har i mein range(100) {
+    agar i == 5 {
+        tor # Stops the loop entirely
     }
     likh(i)
 }
 ```
 
-### `halo` (Continue)
-The `halo` keyword skips the rest of the current block and jumps immediately to the next iteration of the loop.
+### `jari` (Continue)
+The `jari` keyword skips the current iteration and jumps to the next one.
 
 ```sd
-tor i = 1; i <= 5; i = i + 1 {
-    agar i == 3 {
-        halo # Skip printing 3
+har i mein range(5) {
+    agar i == 2 {
+        jari # Skip 2 and continue with 3
     }
     likh(i)
 }
-# Output: 1, 2, 4, 5
+# Output: 0, 1, 3, 4
 ```
 
 ---
 
-## 4. Nested Loops
+## 4. Infinite Loops
 
-Just like conditions, you can put a loop inside another loop. This is commonly used for working with grids or matrices.
+If you need a loop that runs forever (e.g., for a server or a game engine), you can use `jistain sach`.
 
 ```sd
-tor x = 1; x <= 3; x = x + 1 {
-    tor y = 1; y <= 3; y = y + 1 {
-        likh("Coordinate: " + lafz(x) + "," + lafz(y))
-    }
+jistain sach {
+    likh("Press Ctrl+C to stop me!")
 }
 ```
-
-Be careful with nested loops; if you loop 100 times inside another loop that runs 100 times, your code will execute 10,000 times!
