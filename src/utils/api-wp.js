@@ -23,27 +23,32 @@ const POST_SEO_FRAGMENT = gql`
 `;
 
 const getAllWpBlogCategories = cache(async () => {
-  const categoriesQuery = gql`
-    query Categories {
-      categories {
-        nodes {
-          name
-          slug
-          posts {
-            nodes {
-              id
+  try {
+    const categoriesQuery = gql`
+      query Categories {
+        categories {
+          nodes {
+            name
+            slug
+            posts {
+              nodes {
+                id
+              }
             }
           }
         }
       }
-    }
-  `;
-  const data = await fetchGraphQL(graphQLClient).request(categoriesQuery);
-  const filteredCategories = data?.categories?.nodes.filter(
-    (category) => category.slug !== 'uncategorized' && category.posts.nodes.length > 0
-  );
+    `;
+    const data = await fetchGraphQL(graphQLClient).request(categoriesQuery);
+    const filteredCategories = data?.categories?.nodes.filter(
+      (category) => category.slug !== 'uncategorized' && category.posts.nodes.length > 0
+    );
 
-  return filteredCategories;
+    return filteredCategories || [];
+  } catch (error) {
+    console.error('Failed to fetch blog categories:', error);
+    return [];
+  }
 });
 
 const getAllCategories = async () => {

@@ -247,6 +247,7 @@ function orderSubsections(sectionName, subsectionNames) {
  * Flatten all docs from a section (direct files + subsection files), sorted by title
  */
 function getAllDocsForSection(sectionData) {
+  if (!sectionData || !sectionData._files) return [];
   const all = [...sectionData._files];
   for (const subDocs of Object.values(sectionData._subsections)) {
     all.push(...subDocs);
