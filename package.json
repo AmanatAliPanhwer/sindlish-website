@@ -23,7 +23,7 @@
     "check:pricing-sync": "node src/scripts/check-pricing-sync.js",
     "check:content-data": "node scripts/validate-content-data.js",
     "generate:pricing": "node src/scripts/check-pricing-sync.js --generate",
-    "prepare": "husky install",
+    "prepare": "husky install || true",
     "test": "npx cypress open",
     "test:unit": "vitest",
     "test:unit:ui": "vitest --ui",
