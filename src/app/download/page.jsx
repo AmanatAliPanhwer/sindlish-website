@@ -1,5 +1,6 @@
 'use client';
 import { m, LazyMotion, domAnimation } from 'framer-motion';
+
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
@@ -9,40 +10,56 @@ const PLATFORMS = [
     name: 'Windows',
     arch: 'x86_64',
     file: 'sindlish-installer-win64.exe',
-    instructions: ['Download the .exe installer', 'Run the installer to set up paths', 'Run sindlish --version'],
+    instructions: [
+      'Download the .exe installer',
+      'Run the installer to set up paths',
+      'Run sindlish --version',
+    ],
   },
   {
     name: 'Linux',
     arch: 'x86_64',
     file: 'sindlish-installer-linux.deb',
-    instructions: ['Download the .deb package', 'Run: sudo dpkg -i sindlish-installer-linux.deb', 'Run sindlish --version'],
+    instructions: [
+      'Download the .deb package',
+      'Run: sudo dpkg -i sindlish-installer-linux.deb',
+      'Run sindlish --version',
+    ],
   },
   {
     name: 'macOS',
     arch: 'arm64 / x86_64',
     file: 'sindlish-installer-macos.pkg',
-    instructions: ['Download the .pkg installer', 'Open the package to run the installer', 'Run sindlish --version'],
+    instructions: [
+      'Download the .pkg installer',
+      'Open the package to run the installer',
+      'Run sindlish --version',
+    ],
   },
 ];
 const DownloadPage = () => (
   <Layout isHeaderSticky isHeaderStickyOverlay theme="black">
     <LazyMotion features={domAnimation}>
-      <section className="safe-paddings relative bg-black-pure text-white">
-        <Container className="relative z-10 pt-40 pb-32 xl:pt-32 xl:pb-24 lg:pt-28 lg:pb-20 md:pt-24 md:pb-16" size="1600">
+      <section className="relative bg-black-pure safe-paddings text-white">
+        <Container
+          className="relative z-10 pt-40 pb-32 xl:pt-32 xl:pb-24 lg:pt-28 lg:pb-20 md:pt-24 md:pb-16"
+          size="1600"
+        >
           {/* Header */}
           <m.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span className="text-sm font-medium uppercase tracking-wider text-[#E02424]">
+            <span className="text-sm font-medium tracking-wider text-[#E02424] uppercase">
               Download
             </span>
-            <h1 className="mt-3 text-[52px] font-bold leading-tight tracking-tighter xl:text-4xl lg:text-[32px] sm:text-[28px]">
+            <h1 className="mt-3 text-[52px] leading-tight font-bold tracking-tighter xl:text-4xl lg:text-[32px] sm:text-[28px]">
               Get Sindlish <span className="text-gray-new-40">v0.1.0</span>
             </h1>
             <p className="mt-4 max-w-xl text-xl leading-snug tracking-extra-tight text-gray-new-60 lg:text-lg">
-              The first alpha release of the Sindlish interpreter. Download the binary for your platform and start coding in your mother tongue.
+              The first alpha release of the Sindlish interpreter. Download the binary for your
+              platform and start coding in your mother tongue.
             </p>
           </m.div>
           {/* Alpha Notice */}
@@ -53,15 +70,20 @@ const DownloadPage = () => (
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <div className="flex items-center gap-3">
-              <div className="size-2 rounded-none bg-[#E02424] animate-pulse" />
+              <div className="size-2 animate-pulse rounded-none bg-[#E02424]" />
               <span className="font-bold text-[#E02424]">Alpha Release Notice</span>
             </div>
             <p className="mt-2 text-sm leading-relaxed text-gray-new-60">
-              This is our first alpha release. <strong>Important:</strong> These binaries are currently unverified by platform vendors (Windows, Apple, etc.), so your system may flag them as risky. Rest assured, <strong>all Sindlish source code is completely open-source</strong> and available for audit on GitHub. Furthermore, Linux and macOS builds are experimental and may behave unexpectedly; we welcome your feedback to help us stabilize them!
+              This is our first alpha release. <strong>Important:</strong> These binaries are
+              currently unverified by platform vendors (Windows, Apple, etc.), so your system may
+              flag them as risky. Rest assured,{' '}
+              <strong>all Sindlish source code is completely open-source</strong> and available for
+              audit on GitHub. Furthermore, Linux and macOS builds are experimental and may behave
+              unexpectedly; we welcome your feedback to help us stabilize them!
             </p>
           </m.div>
           {/* Platform Cards */}
-          <div className="mt-16 grid grid-cols-3 gap-6 lg:grid-cols-1 lg:max-w-lg">
+          <div className="mt-16 grid grid-cols-3 gap-6 lg:max-w-lg lg:grid-cols-1">
             {PLATFORMS.map(({ name, arch, file, instructions }, index) => (
               <m.div
                 className="group flex flex-col rounded-none border border-gray-new-20 bg-[#0A0A0B] transition-colors hover:border-gray-new-30"
@@ -74,7 +96,7 @@ const DownloadPage = () => (
                 <div className="flex items-center justify-between border-b border-gray-new-20 p-6">
                   <div>
                     <h3 className="text-2xl font-bold tracking-tighter">{name}</h3>
-                    <span className="mt-1 block text-xs font-bold uppercase tracking-widest text-gray-new-50">
+                    <span className="mt-1 block text-xs font-bold tracking-widest text-gray-new-50 uppercase">
                       {arch}
                     </span>
                   </div>
@@ -96,7 +118,7 @@ const DownloadPage = () => (
                   </ol>
                   <Button
                     className="mt-6 w-full justify-center"
-                    to={`https://github.com/AmanatAliPanhwer/Sindlish/releases/download/v0.1.0/${file}`}
+                    to={`https://github.com/AmanatAliPanhwer/Sindlish/releases/download/latest/${file}`}
                     target="_blank"
                     theme="white-filled"
                     size="new"
