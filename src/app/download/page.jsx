@@ -8,20 +8,20 @@ const PLATFORMS = [
   {
     name: 'Windows',
     arch: 'x86_64',
-    file: 'sindlish-windows.exe',
-    instructions: ['Download the .exe file', 'Add it to your system PATH', 'Run sindlish --version'],
+    file: 'sindlish-installer-win64.exe',
+    instructions: ['Download the .exe installer', 'Run the installer to set up paths', 'Run sindlish --version'],
   },
   {
     name: 'Linux',
     arch: 'x86_64',
-    file: 'sindlish-linux',
-    instructions: ['Download the binary', 'chmod +x sindlish-linux', 'Move to /usr/local/bin'],
+    file: 'sindlish-installer-linux.deb',
+    instructions: ['Download the .deb package', 'Run: sudo dpkg -i sindlish-installer-linux.deb', 'Run sindlish --version'],
   },
   {
     name: 'macOS',
     arch: 'arm64 / x86_64',
-    file: 'sindlish-macos',
-    instructions: ['Download the binary', 'chmod +x sindlish-macos', 'Move to /usr/local/bin'],
+    file: 'sindlish-installer-macos.pkg',
+    instructions: ['Download the .pkg installer', 'Open the package to run the installer', 'Run sindlish --version'],
   },
 ];
 const DownloadPage = () => (
@@ -47,15 +47,18 @@ const DownloadPage = () => (
           </m.div>
           {/* Alpha Notice */}
           <m.div
-            className="mt-10 flex items-center gap-3 rounded-none border border-[#E02424]/30 bg-[#E02424]/5 px-5 py-3 max-w-xl"
+            className="mt-10 max-w-2xl rounded-none border border-[#E02424]/30 bg-[#E02424]/5 px-5 py-4"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="size-2 rounded-none bg-[#E02424] animate-pulse" />
-            <span className="text-sm tracking-tight text-gray-new-60">
-              <span className="font-bold text-[#E02424]">Alpha Release</span> — This is the first public release. Expect breaking changes.
-            </span>
+            <div className="flex items-center gap-3">
+              <div className="size-2 rounded-none bg-[#E02424] animate-pulse" />
+              <span className="font-bold text-[#E02424]">Alpha Release Notice</span>
+            </div>
+            <p className="mt-2 text-sm leading-relaxed text-gray-new-60">
+              This is our first alpha release. <strong>Important:</strong> These binaries are currently unverified by platform vendors (Windows, Apple, etc.), so your system may flag them as risky. Rest assured, <strong>all Sindlish source code is completely open-source</strong> and available for audit on GitHub. Furthermore, Linux and macOS builds are experimental and may behave unexpectedly; we welcome your feedback to help us stabilize them!
+            </p>
           </m.div>
           {/* Platform Cards */}
           <div className="mt-16 grid grid-cols-3 gap-6 lg:grid-cols-1 lg:max-w-lg">
