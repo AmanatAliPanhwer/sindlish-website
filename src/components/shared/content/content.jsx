@@ -39,6 +39,7 @@ import Mermaid from 'components/shared/mermaid';
 import getCodeProps from 'lib/rehype-code-props';
 import { cn } from 'utils/cn';
 
+import sharedMdxComponents from '../../../../content/docs/shared-content';
 import FeatureList from '../feature-list';
 import QuickLinks from '../quick-links';
 import QuoteBlock from '../quote-block';
@@ -170,6 +171,13 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   ExternalCode: (props) => <ExternalCode {...props} />,
   MegaLink,
   CopyPrompt,
+  ...Object.keys(sharedMdxComponents).reduce(
+    (acc, key) => ({
+      ...acc,
+      [key]: (props) => <IncludeBlock url={sharedMdxComponents[key]} {...props} />,
+    }),
+    {}
+  ),
 });
 
 const Content = ({
