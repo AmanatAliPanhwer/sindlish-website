@@ -118,7 +118,7 @@ const DownloadPage = () => (
                   </ol>
                   <Button
                     className="mt-6 w-full justify-center"
-                    to={`https://github.com/AmanatAliPanhwer/Sindlish/releases/download/latest/${file}`}
+                    to={`https://github.com/AmanatAliPanhwer/Sindlish/releases/latest/download//${file}`}
                     target="_blank"
                     theme="white-filled"
                     size="new"
